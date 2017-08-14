@@ -12,14 +12,4 @@
     <artifactId>solar-client-dao</artifactId>
     <packaging>jar</packaging>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.roachfu.solar</groupId>
-            <artifactId>solar-common</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
-        
-    </dependencies>
-
-
 </project>
