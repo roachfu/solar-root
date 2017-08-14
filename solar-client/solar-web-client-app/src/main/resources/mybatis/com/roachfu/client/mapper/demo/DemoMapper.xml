@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.roachfu.solar.client.demo.mapper.DemoMapper">
+
+    <resultMap id="DemoMap" type="Demo">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="demo_name" jdbcType="VARCHAR" property="demoName"/>
+        <result column="demo_value" jdbcType="VARCHAR" property="demoValue"/>
+        <result column="del_flag" jdbcType="TINYINT" property="delFlag"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+
+    <select id="selectDemoList" resultMap="DemoMap">
+        select
+            id,
+            demo_name,
+            demo_value,
+            create_time
+        from
+            t_demo
+    </select>
+
+    <!-- 获取详情 -->
+    <select id="getInfoById" parameterType="string" resultMap="DemoMap">
+        select
+        id,
+        demo_name,
+        demo_value,
+        create_time
+        from
+        t_demo
+        where
+        id = #{id,jdbcType=VARCHAR}
+        and demo_status = 1
+    </select>
+
+    <insert id="insert" parameterType="Demo">
+        insert into t_demo (id, demo_name, demo_value,
+        demo_status, update_time, create_time)
+        values (#{id,jdbcType=VARCHAR}, #{demoName,jdbcType=VARCHAR}, #{demoValue,jdbcType=TINYINT},
+        #{demoStatus,jdbcType=TINYINT}, #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})
+    </insert>
+
+    <!--
+        根据id更新demo
+    -->
+    <update id="updateById" parameterType="Demo">
+        update t_demo
+        <set>
+            <if test="demoName != null">
+                demo_name = #{demoName,jdbcType=VARCHAR},
+            </if>
+            <if test="demoValue != null">
+                demo_value = #{demoValue,jdbcType=TINYINT},
+            </if>
+            <if test="demoStatus != null">
+                demo_status = #{demoStatus,jdbcType=TINYINT},
+            </if>
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <!--
+        根据id逻辑删除记录
+    -->
+    <update id="deleteById" parameterType="string">
+        update t_demo set demo_status = 0 where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+</mapper>
