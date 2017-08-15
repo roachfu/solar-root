@@ -25,4 +25,18 @@ public interface DemoMapper {
      * @return
      */
     Demo selectDemoById(@Param("id") String id);
+
+    /**
+     * 根据id查询demo的记录数
+     * @param demoId
+     * @return
+     */
+    int countDemoById(@Param("id") String demoId);
+
+    /**
+     * 根据id删除demo
+     * @param demoId
+     * @return
+     */
+    int deleteDemoById(String demoId);
 }

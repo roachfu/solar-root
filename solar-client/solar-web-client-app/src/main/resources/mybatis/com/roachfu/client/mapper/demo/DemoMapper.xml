@@ -35,6 +35,10 @@
             id = #{id,jdbcType=VARCHAR}
     </select>
 
+    <select id="countDemoById" parameterType="string" resultType="int">
+        select count(1) from t_demo where id = #{id,jdbcType=VARCHAR} and del_flag = 0
+    </select>
+
     <insert id="insert" parameterType="Demo">
         insert into t_demo (id, demo_name, demo_value,
         demo_status, update_time, create_time)
@@ -65,8 +69,8 @@
     <!--
         根据id逻辑删除记录
     -->
-    <update id="deleteById" parameterType="string">
-        update t_demo set demo_status = 0 where id = #{id,jdbcType=VARCHAR}
+    <update id="deleteDemoById" parameterType="string">
+        update t_demo set del_flag = 1 where id = #{id,jdbcType=VARCHAR}
     </update>
 
 </mapper>

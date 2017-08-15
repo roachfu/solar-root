@@ -2,10 +2,7 @@ package com.roachfu.solar.app.controller.demo;
 
 import com.roachfu.solar.client.base.entity.APIResponse;
 import com.roachfu.solar.client.demo.service.DemoService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -39,5 +36,10 @@ public class DemoController {
     @GetMapping(value = "/{id}")
     public APIResponse queryDemo(@PathVariable("id")String demoId){
         return new APIResponse(demoService.getDemo(demoId));
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public APIResponse deleteDemo(@PathVariable("id")String demoId){
+        return demoService.deleteDemo(demoId);
     }
 }

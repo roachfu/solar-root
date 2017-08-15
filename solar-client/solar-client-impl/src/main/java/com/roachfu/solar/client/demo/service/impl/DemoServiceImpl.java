@@ -1,5 +1,7 @@
 package com.roachfu.solar.client.demo.service.impl;
 
+import com.roachfu.solar.client.base.entity.APIResponse;
+import com.roachfu.solar.client.base.eums.ErrorTypeEnum;
 import com.roachfu.solar.client.demo.entity.Demo;
 import com.roachfu.solar.client.demo.mapper.DemoMapper;
 import com.roachfu.solar.client.demo.service.DemoService;
@@ -42,7 +44,26 @@ public class DemoServiceImpl implements DemoService {
     public DemoVO getDemo(String id) {
         Demo demo = demoMapper.selectDemoById(id);
         DemoVO demoVO = new DemoVO();
-        BeanUtils.copyProperties(demo, demoVO);
+        if(demo != null) {
+            BeanUtils.copyProperties(demo, demoVO);
+        }
         return demoVO;
+    }
+
+    @Override
+    public APIResponse deleteDemo(String demoId) {
+        // 判断demoId是否存在
+        int count = demoMapper.countDemoById(demoId);
+        if(count == 0){
+            return new APIResponse(ErrorTypeEnum.NOT_FOUNT);
+        }
+
+        // 删除
+        int flag = demoMapper.deleteDemoById(demoId);
+        if (flag == 0){
+            return new APIResponse(ErrorTypeEnum.FAILURE);
+        }
+
+        return new APIResponse();
     }
 }
