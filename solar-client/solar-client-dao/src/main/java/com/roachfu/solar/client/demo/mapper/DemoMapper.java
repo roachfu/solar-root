@@ -1,6 +1,7 @@
 package com.roachfu.solar.client.demo.mapper;
 
 import com.roachfu.solar.client.demo.entity.Demo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,4 +18,11 @@ public interface DemoMapper {
      * @return
      */
     List<Demo> selectDemoList();
+
+    /**
+     * 根据id获取demo详情
+     * @param id 主键id
+     * @return
+     */
+    Demo selectDemoById(@Param("id") String id);
 }

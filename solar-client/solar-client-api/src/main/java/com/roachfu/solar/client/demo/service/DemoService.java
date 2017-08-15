@@ -18,4 +18,10 @@ public interface DemoService {
      */
     List<DemoVO> listDemo();
 
+    /**
+     * 获取demo详情
+     * @param id demo主键
+     * @return
+     */
+    DemoVO getDemo(String id);
 }

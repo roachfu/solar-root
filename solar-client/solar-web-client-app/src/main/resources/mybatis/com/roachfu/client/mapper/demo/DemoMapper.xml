@@ -11,28 +11,28 @@
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
     </resultMap>
 
+    <sql id="demo_column_list">
+        id,
+        demo_name,
+        demo_value,
+        create_time
+    </sql>
+
     <select id="selectDemoList" resultMap="DemoMap">
         select
-            id,
-            demo_name,
-            demo_value,
-            create_time
+            <include refid="demo_column_list"/>
         from
             t_demo
     </select>
 
     <!-- 获取详情 -->
-    <select id="getInfoById" parameterType="string" resultMap="DemoMap">
+    <select id="selectDemoById" parameterType="string" resultMap="DemoMap">
         select
-        id,
-        demo_name,
-        demo_value,
-        create_time
+            <include refid="demo_column_list"/>
         from
-        t_demo
+            t_demo
         where
-        id = #{id,jdbcType=VARCHAR}
-        and demo_status = 1
+            id = #{id,jdbcType=VARCHAR}
     </select>
 
     <insert id="insert" parameterType="Demo">

@@ -6,13 +6,23 @@ import com.roachfu.solar.client.base.vo.BaseVO;
  * @author roach
  * @date 13/08/2017 11:30
  */
-public class DemoVO extends BaseVO{
+public class DemoVO extends BaseVO {
 
     private static final long serialVersionUID = -3480648210312592901L;
+
+    private Long id;
 
     private String demoName;
 
     private String demoValue;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getDemoName() {
         return demoName;

@@ -37,4 +37,12 @@ public class DemoServiceImpl implements DemoService {
 
         return demoVOList;
     }
+
+    @Override
+    public DemoVO getDemo(String id) {
+        Demo demo = demoMapper.selectDemoById(id);
+        DemoVO demoVO = new DemoVO();
+        BeanUtils.copyProperties(demo, demoVO);
+        return demoVO;
+    }
 }
