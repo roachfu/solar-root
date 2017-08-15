@@ -1,5 +1,8 @@
 package com.roachfu.solar.client.base.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.roachfu.solar.client.base.eums.ErrorTypeEnum;
+
 import java.io.Serializable;
 
 /**
@@ -8,6 +11,7 @@ import java.io.Serializable;
  * @author roach
  * @date 13/08/2017 10:59
  */
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
 public class APIResponse implements Serializable {
 
     private static final long serialVersionUID = 3413659173456891928L;
@@ -32,6 +36,10 @@ public class APIResponse implements Serializable {
     public APIResponse(Meta meta, Object data) {
         this.meta = meta;
         this.data = data;
+    }
+
+    public APIResponse(ErrorTypeEnum errorTypeEnum){
+        this.meta = new Meta(errorTypeEnum.getCode(), errorTypeEnum.getMsg());
     }
 
     public Meta getMeta() {
