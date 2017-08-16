@@ -11,7 +11,6 @@ import javax.annotation.Resource;
  *
  * Created by roach on 09/08/2017.
  */
-
 @RestController
 @RequestMapping(value = "/v1/demos")
 public class DemoController {
@@ -21,7 +20,7 @@ public class DemoController {
 
     /**
      * 获取demo列表
-     * @return
+     * @return demo列表
      */
     @GetMapping
     public APIResponse queryDemoList(){
@@ -31,13 +30,18 @@ public class DemoController {
     /**
      * 获取单个demo
      * @param demoId demo主键id
-     * @return
+     * @return 查询结果
      */
     @GetMapping(value = "/{id}")
     public APIResponse queryDemo(@PathVariable("id")String demoId){
         return new APIResponse(demoService.getDemo(demoId));
     }
 
+    /**
+     * 删除单个demo
+     * @param demoId demo主键
+     * @return 删除结果
+     */
     @DeleteMapping(value = "/{id}")
     public APIResponse deleteDemo(@PathVariable("id")String demoId){
         return demoService.deleteDemo(demoId);
