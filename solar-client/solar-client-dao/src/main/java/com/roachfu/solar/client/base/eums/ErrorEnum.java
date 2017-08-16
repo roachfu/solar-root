@@ -5,7 +5,7 @@ package com.roachfu.solar.client.base.eums;
  * @author fuqiang
  * @time 2017/3/4 12:28
  */
-public enum ErrorTypeEnum {
+public enum ErrorEnum {
 
     /**
      * 200, 成功
@@ -31,7 +31,7 @@ public enum ErrorTypeEnum {
     /** 错误信息 */
     private String msg;
 
-    ErrorTypeEnum(Integer code, String msg) {
+    ErrorEnum(Integer code, String msg) {
         this.code = code;
         this.msg = msg;
     }
