@@ -4,6 +4,8 @@ solar-root.iml
 solar-common/solar-common.iml
 solar-common/target
 
+solar-client/solar-client.iml
+
 solar-client/solar-client-dao/target
 solar-client/solar-client-dao/solar-client-dao.iml
 
