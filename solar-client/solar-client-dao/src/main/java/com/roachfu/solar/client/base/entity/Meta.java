@@ -1,6 +1,6 @@
 package com.roachfu.solar.client.base.entity;
 
-import com.roachfu.solar.client.base.eums.ErrorTypeEnum;
+import com.roachfu.solar.client.base.eums.ErrorEnum;
 
 import java.io.Serializable;
 
@@ -10,14 +10,18 @@ import java.io.Serializable;
  * @author fuqiang
  * @time 2017/2/26 21:16
  */
-public class Meta implements Serializable{
+public class Meta implements Serializable {
 
     private static final long serialVersionUID = -6874412483876975059L;
 
-    /** 错误代码 */
+    /**
+     * 错误代码
+     */
     private Integer code;
 
-    /** 错误信息 */
+    /**
+     * 错误信息
+     */
     private String msg;
 
     public Meta() {
@@ -29,9 +33,9 @@ public class Meta implements Serializable{
         this.msg = msg;
     }
 
-    public Meta(ErrorTypeEnum errorType){
-        this.code = errorType.getCode();
-        this.msg = errorType.getMsg();
+    public Meta(ErrorEnum errorEnum) {
+        this.code = errorEnum.getCode();
+        this.msg = errorEnum.getMsg();
     }
 
     public Integer getCode() {

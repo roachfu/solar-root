@@ -1,5 +1,7 @@
 package com.roachfu.solar.client.base.entity;
 
+import com.roachfu.solar.common.util.id.IdWorker;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -39,7 +41,8 @@ public class BaseEntity implements Serializable{
     private String updateUser;
 
     public void init(){
-//        this.id =
+        IdWorker idWorker = IdWorker.getFlowIdWorkerInstance();
+        this.id = idWorker.nextId();
         this.createTime = new Date();
         this.createUser = "";
         this.updateTime = new Date();

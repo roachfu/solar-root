@@ -1,7 +1,7 @@
 package com.roachfu.solar.client.base.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.roachfu.solar.client.base.eums.ErrorTypeEnum;
+import com.roachfu.solar.client.base.eums.ErrorEnum;
 
 import java.io.Serializable;
 
@@ -20,7 +20,7 @@ public class APIResponse implements Serializable {
     private Meta meta;
 
     /** 返回结果 */
-    private Object data;
+    private transient Object data;
 
     public APIResponse() {
         this.meta = new Meta(200, "ok");
@@ -38,8 +38,8 @@ public class APIResponse implements Serializable {
         this.data = data;
     }
 
-    public APIResponse(ErrorTypeEnum errorTypeEnum){
-        this.meta = new Meta(errorTypeEnum.getCode(), errorTypeEnum.getMsg());
+    public APIResponse(ErrorEnum errorEnum){
+        this.meta = new Meta(errorEnum.getCode(), errorEnum.getMsg());
     }
 
     public Meta getMeta() {
