@@ -1,11 +1,14 @@
 package com.roachfu.solar.client.demo.service.impl;
 
 import com.roachfu.solar.client.base.entity.APIResponse;
-import com.roachfu.solar.client.base.eums.ErrorTypeEnum;
+import com.roachfu.solar.client.base.eums.ErrorEnum;
+import com.roachfu.solar.client.demo.dto.DemoAddDTO;
 import com.roachfu.solar.client.demo.entity.Demo;
 import com.roachfu.solar.client.demo.mapper.DemoMapper;
 import com.roachfu.solar.client.demo.service.DemoService;
 import com.roachfu.solar.client.demo.vo.DemoVO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +24,8 @@ import java.util.List;
  */
 @Service
 public class DemoServiceImpl implements DemoService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(DemoServiceImpl.class);
 
     @Resource
     private DemoMapper demoMapper;
@@ -55,15 +60,28 @@ public class DemoServiceImpl implements DemoService {
         // 判断demoId是否存在
         int count = demoMapper.countDemoById(demoId);
         if(count == 0){
-            return new APIResponse(ErrorTypeEnum.NOT_FOUNT);
+            return new APIResponse(ErrorEnum.NOT_FOUNT);
         }
 
         // 删除
         int flag = demoMapper.deleteDemoById(demoId);
         if (flag == 0){
-            return new APIResponse(ErrorTypeEnum.FAILURE);
+            return new APIResponse(ErrorEnum.FAILURE);
         }
 
         return new APIResponse();
+    }
+
+    @Override
+    public APIResponse saveDemo(DemoAddDTO demoAddDTO) {
+        Demo demo = new Demo();
+        demo.init();
+        BeanUtils.copyProperties(demoAddDTO, demo);
+        LOGGER.info("{}", demo);
+        int flag = demoMapper.insertDemo(demo);
+        if (flag > 0){
+            return new APIResponse();
+        }
+        return new APIResponse(ErrorEnum.ERROR);
     }
 }

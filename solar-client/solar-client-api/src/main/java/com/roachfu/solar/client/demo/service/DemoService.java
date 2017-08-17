@@ -1,6 +1,7 @@
 package com.roachfu.solar.client.demo.service;
 
 import com.roachfu.solar.client.base.entity.APIResponse;
+import com.roachfu.solar.client.demo.dto.DemoAddDTO;
 import com.roachfu.solar.client.demo.vo.DemoVO;
 
 import java.util.List;
@@ -32,4 +33,11 @@ public interface DemoService {
      * @return
      */
     APIResponse deleteDemo(String demoId);
+
+    /**
+     * 新增一条demo记录
+     * @param demoAddDTO 请求参数
+     * @return 新增结果
+     */
+    APIResponse saveDemo(DemoAddDTO demoAddDTO);
 }

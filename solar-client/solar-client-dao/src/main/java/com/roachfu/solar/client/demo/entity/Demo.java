@@ -26,6 +26,14 @@ public class Demo extends BaseEntity {
      */
     private Integer delFlag;
 
+    @Override
+    public void init(){
+        super.init();
+        this.demoName = "";
+        this.demoValue = "";
+        this.delFlag = 0;
+    }
+
     public String getDemoName() {
         return demoName;
     }

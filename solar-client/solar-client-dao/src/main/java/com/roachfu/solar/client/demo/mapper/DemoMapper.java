@@ -39,4 +39,11 @@ public interface DemoMapper {
      * @return
      */
     int deleteDemoById(String demoId);
+
+    /**
+     * 添加一条demo记录
+     * @param demo 数据
+     * @return 0|1
+     */
+    int insertDemo(Demo demo);
 }

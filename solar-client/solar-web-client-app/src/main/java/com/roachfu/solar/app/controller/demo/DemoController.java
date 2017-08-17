@@ -1,10 +1,13 @@
 package com.roachfu.solar.app.controller.demo;
 
+import com.roachfu.solar.app.controller.base.BaseController;
 import com.roachfu.solar.client.base.entity.APIResponse;
+import com.roachfu.solar.client.demo.dto.DemoAddDTO;
 import com.roachfu.solar.client.demo.service.DemoService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 /**
  * demo 控制器
@@ -13,7 +16,7 @@ import javax.annotation.Resource;
  */
 @RestController
 @RequestMapping(value = "/v1/demos")
-public class DemoController {
+public class DemoController extends BaseController{
 
     @Resource
     private DemoService demoService;
@@ -45,5 +48,15 @@ public class DemoController {
     @DeleteMapping(value = "/{id}")
     public APIResponse deleteDemo(@PathVariable("id")String demoId){
         return demoService.deleteDemo(demoId);
+    }
+
+    /**
+     * 新增一条demo记录
+     * @param demoAddDTO demo添加请求实体
+     * @return
+     */
+    @PostMapping
+    public APIResponse addDemo(@RequestBody @Valid DemoAddDTO demoAddDTO){
+        return demoService.saveDemo(demoAddDTO);
     }
 }
