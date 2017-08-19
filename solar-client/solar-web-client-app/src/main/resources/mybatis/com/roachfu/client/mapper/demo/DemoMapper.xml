@@ -3,7 +3,7 @@
 <mapper namespace="com.roachfu.solar.client.demo.mapper.DemoMapper">
 
     <resultMap id="DemoMap" type="Demo">
-        <id column="id" jdbcType="BIGINT" property="id"/>
+        <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="demo_name" jdbcType="VARCHAR" property="demoName"/>
         <result column="demo_value" jdbcType="VARCHAR" property="demoValue"/>
         <result column="del_flag" jdbcType="TINYINT" property="delFlag"/>
@@ -36,14 +36,14 @@
     </select>
 
     <select id="countDemoById" parameterType="string" resultType="int">
-        select count(1) from t_demo where id = #{id,jdbcType=VARCHAR} and del_flag = 0
+        select count(1) from t_demo where id = #{id,jdbcType=BIGINT} and del_flag = 0
     </select>
 
     <insert id="insertDemo" parameterType="Demo">
         insert into t_demo (id, demo_name, demo_value,
             del_flag, update_time, update_user,
             create_time, create_user)
-        values (#{id,jdbcType=BIGINT}, #{demoName,jdbcType=VARCHAR}, #{demoValue,jdbcType=VARCHAR},
+        values (#{id,jdbcType=VARCHAR}, #{demoName,jdbcType=VARCHAR}, #{demoValue,jdbcType=VARCHAR},
             #{delFlag,jdbcType=TINYINT}, #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR},
             #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}
         )
@@ -52,19 +52,16 @@
     <!--
         根据id更新demo
     -->
-    <update id="updateById" parameterType="Demo">
+    <update id="updateDemoById" parameterType="Demo">
         update t_demo
         <set>
-            <if test="demoName != null">
+            <if test="demoName != null and demoName != ''">
                 demo_name = #{demoName,jdbcType=VARCHAR},
             </if>
-            <if test="demoValue != null">
+            <if test="demoValue != null and demoValue != ''">
                 demo_value = #{demoValue,jdbcType=TINYINT},
             </if>
-            <if test="demoStatus != null">
-                demo_status = #{demoStatus,jdbcType=TINYINT},
-            </if>
-            update_time = #{updateTime,jdbcType=TIMESTAMP},
+            update_time = #{updateTime,jdbcType=TIMESTAMP}
         </set>
         where id = #{id,jdbcType=VARCHAR}
     </update>
@@ -73,7 +70,7 @@
         根据id逻辑删除记录
     -->
     <update id="deleteDemoById" parameterType="string">
-        update t_demo set del_flag = 1 where id = #{id,jdbcType=VARCHAR}
+        update t_demo set del_flag = 1 where id = #{id,jdbcType=BIGINT}
     </update>
 
 </mapper>

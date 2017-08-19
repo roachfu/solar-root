@@ -18,7 +18,7 @@ public class BaseEntity implements Serializable{
     /**
      * id
      */
-    private Long id;
+    private String id;
 
     /**
      * 创建时间
@@ -42,18 +42,18 @@ public class BaseEntity implements Serializable{
 
     public void init(){
         IdWorker idWorker = IdWorker.getFlowIdWorkerInstance();
-        this.id = idWorker.nextId();
+        this.id = Long.toString(idWorker.nextId());
         this.createTime = new Date();
         this.createUser = "";
         this.updateTime = new Date();
         this.updateUser = "";
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

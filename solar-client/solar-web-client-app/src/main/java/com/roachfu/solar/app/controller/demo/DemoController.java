@@ -3,6 +3,7 @@ package com.roachfu.solar.app.controller.demo;
 import com.roachfu.solar.app.controller.base.BaseController;
 import com.roachfu.solar.client.base.entity.APIResponse;
 import com.roachfu.solar.client.demo.dto.DemoAddDTO;
+import com.roachfu.solar.client.demo.dto.DemoUpdateDTO;
 import com.roachfu.solar.client.demo.service.DemoService;
 import org.springframework.web.bind.annotation.*;
 
@@ -58,5 +59,16 @@ public class DemoController extends BaseController{
     @PostMapping
     public APIResponse addDemo(@RequestBody @Valid DemoAddDTO demoAddDTO){
         return demoService.saveDemo(demoAddDTO);
+    }
+
+    /**
+     * 更新demo
+     * @param demoUpdateDTO 更新参数
+     * @return 更新结果
+     */
+    @PutMapping(value = "/{id}")
+    public APIResponse updateDemo(@RequestBody @Valid DemoUpdateDTO demoUpdateDTO, @PathVariable("id") String demoId){
+        demoUpdateDTO.setId(demoId);
+        return demoService.updateDemo(demoUpdateDTO);
     }
 }

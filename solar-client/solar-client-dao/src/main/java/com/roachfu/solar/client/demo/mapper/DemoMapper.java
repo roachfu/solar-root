@@ -46,4 +46,11 @@ public interface DemoMapper {
      * @return 0|1
      */
     int insertDemo(Demo demo);
+
+    /**
+     * 根据id修改demo
+     * @param demo 数据
+     * @return 0|1
+     */
+    int updateDemoById(Demo demo);
 }

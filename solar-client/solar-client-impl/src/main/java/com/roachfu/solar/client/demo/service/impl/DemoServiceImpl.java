@@ -3,6 +3,7 @@ package com.roachfu.solar.client.demo.service.impl;
 import com.roachfu.solar.client.base.entity.APIResponse;
 import com.roachfu.solar.client.base.eums.ErrorEnum;
 import com.roachfu.solar.client.demo.dto.DemoAddDTO;
+import com.roachfu.solar.client.demo.dto.DemoUpdateDTO;
 import com.roachfu.solar.client.demo.entity.Demo;
 import com.roachfu.solar.client.demo.mapper.DemoMapper;
 import com.roachfu.solar.client.demo.service.DemoService;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -82,6 +84,24 @@ public class DemoServiceImpl implements DemoService {
         if (flag > 0){
             return new APIResponse();
         }
-        return new APIResponse(ErrorEnum.ERROR);
+        return new APIResponse(ErrorEnum.FAILURE);
+    }
+
+    @Override
+    public APIResponse updateDemo(DemoUpdateDTO demoUpdateDTO) {
+        // 判断demo是否存在
+        int count = demoMapper.countDemoById(demoUpdateDTO.getId());
+        if(count == 0){
+            return new APIResponse(ErrorEnum.NOT_FOUNT);
+        }
+
+        Demo demo = new Demo();
+        BeanUtils.copyProperties(demoUpdateDTO, demo);
+        demo.setUpdateTime(new Date());
+        int flag = demoMapper.updateDemoById(demo);
+        if (flag > 0){
+            return new APIResponse();
+        }
+        return new APIResponse(ErrorEnum.FAILURE);
     }
 }
