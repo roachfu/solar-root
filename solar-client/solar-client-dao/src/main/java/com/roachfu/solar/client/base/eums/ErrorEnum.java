@@ -20,6 +20,12 @@ public enum ErrorEnum {
     /** 420, 失败 */
     FAILURE(420, "失败"),
 
+    /** 4010001, app key有误 */
+    APP_KEY_ERROR(4010001, "app key有误"),
+
+    /** 4010002, 签名有误 */
+    SIGNATURE_ERROR(4010002, "签名有误"),
+
     /**
      * 500, 服务器繁忙, 请稍后再试
      */
